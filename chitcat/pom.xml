@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>chitcat</artifactId>
-    
+
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -37,8 +37,8 @@
             <artifactId>guava</artifactId>
         </dependency>
         <dependency>
-            <groupId>joda-time</groupId>
-            <artifactId>joda-time</artifactId>
+            <groupId>org.ocpsoft.prettytime</groupId>
+            <artifactId>prettytime</artifactId>
         </dependency>
     </dependencies>
 

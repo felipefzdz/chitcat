@@ -6,7 +6,7 @@ Feature: Read Timeline
   Scenario: Read Timeline
     Given Alice writes FirstAliceChit, 1 hours ago
     And Bob writes FirstBobChit, 5 minutes ago
-    And Alice writes SecondAliceChit, 10 minutes ago
+    And Alice writes SecondAliceChit, 3 minutes ago
     When a user reads Alice timeline
-    Then timeline should contain "FirstAliceChit (1 hour ago), SecondAliceChit (10 minutes ago)"
+    Then timeline should contain "FirstAliceChit (1 hour ago), SecondAliceChit (3 minutes ago)"
     

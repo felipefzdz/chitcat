@@ -1,3 +1,5 @@
+package step_defs;
+
 import com.google.inject.Inject;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
@@ -8,14 +10,12 @@ import io.olid16.domain.entities.Timeline;
 import io.olid16.domain.values.Chit;
 import io.olid16.domain.values.Username;
 
-import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
-import static io.olid16.domain.values.Chit.*;
+import static io.olid16.domain.values.Chit.create;
 import static java.time.Instant.now;
-import static java.time.temporal.ChronoUnit.*;
-import static java.time.temporal.ChronoUnit.MINUTES;
+import static java.time.temporal.ChronoUnit.valueOf;
 
 public class ReadTimelineStepDefs {
 
@@ -31,8 +31,8 @@ public class ReadTimelineStepDefs {
 
     @Given("^([^ ]+) writes ([^ ]+), (\\d+) ([^ ]+) ago$")
     public void user_writes_a_chit_some_minutes_ago(String userName, String chitText, int minutesAgo, String chronoUnit) throws Throwable {
-        Chit chit = create(chitText, now().minus(minutesAgo, valueOf(chronoUnit.toUpperCase())));
-        createChit.with(Username.create(userName), chit);
+        Chit chit = create(chitText, now().minus(minutesAgo, valueOf(chronoUnit.toUpperCase())), Username.create(userName));
+        createChit.with(chit);
     }
 
     @When("^a user reads ([^ ]+) timeline$")
@@ -44,4 +44,5 @@ public class ReadTimelineStepDefs {
     public void timeline_should_contain_chits(List<String> chits) throws Throwable {
         assertThat(timeline.formatWithCreationInstant()).containsSequence(chits);
     }
+
 }

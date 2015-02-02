@@ -2,8 +2,12 @@ package io.olid16.domain.entities;
 
 import io.olid16.domain.values.Username;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class User {
     private final Username username;
+    private Set<Username> followers = new HashSet<>();
 
     private User(Username username) {
         this.username = username;
@@ -15,6 +19,14 @@ public class User {
 
     public Username username() {
         return username;
+    }
+
+    public void addFollower(Username follower) {
+        followers.add(follower);
+    }
+
+    public Set<Username> followers() {
+        return followers;
     }
 
     @Override

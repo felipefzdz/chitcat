@@ -7,7 +7,7 @@ import io.olid16.domain.values.Username;
 import java.util.Optional;
 
 public interface Timelines {
-    void add(Username username, Chit chit);
+    void add(Chit chit);
 
     Optional<Timeline> by(Username username);
 }

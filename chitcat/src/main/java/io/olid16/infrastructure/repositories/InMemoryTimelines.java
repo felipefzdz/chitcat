@@ -8,21 +8,22 @@ import io.olid16.domain.values.Username;
 
 import java.util.Optional;
 
-import static io.olid16.domain.entities.Timeline.*;
-import static java.util.Optional.*;
+import static io.olid16.domain.entities.Timeline.create;
+import static java.util.Optional.empty;
+import static java.util.Optional.of;
 
 public class InMemoryTimelines implements Timelines {
     private LinkedListMultimap<Username, Chit> timelines = LinkedListMultimap.create();
 
     @Override
-    public void add(Username username, Chit chit) {
-        timelines.put(username, chit);
+    public void add(Chit chit) {
+        timelines.put(chit.username(), chit);
     }
 
     @Override
     public Optional<Timeline> by(Username username) {
-        return timelines.containsKey(username) ? 
-                of(create(username, timelines.get(username))) :
+        return timelines.containsKey(username) ?
+                of(create(timelines.get(username))) :
                 empty();
     }
 }

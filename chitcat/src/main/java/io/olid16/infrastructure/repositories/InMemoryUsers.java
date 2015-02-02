@@ -14,8 +14,9 @@ public class InMemoryUsers implements Users {
     private Map<Username, User> users = newHashMap();
 
     @Override
-    public void add(User user) {
+    public User add(User user) {
         users.put(user.username(), user);
+        return user;
     }
 
     @Override

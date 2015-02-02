@@ -1,7 +1,7 @@
 package io.olid16.actions;
 
-import io.olid16.domain.collections.Timelines;
-import io.olid16.domain.entities.Timeline;
+import io.olid16.domain.collections.Walls;
+import io.olid16.domain.entities.Wall;
 import io.olid16.domain.values.Username;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,14 +15,14 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ReadTimelineShould {
+public class ReadWallShould {
 
-    @Mock Timelines timelines;
+    @Mock Walls walls;
 
     @Test public void
-    return_timeline_when_exists(){
-        given(timelines.by(any())).willReturn(Optional.of(Timeline.create(null)));
-        Optional<Timeline> timeline = new ReadTimeline(timelines).with(Username.create("Alice"));
-        assertThat(timeline.isPresent()).isTrue();
+    return_walls_when_exists(){
+        given(walls.by(any())).willReturn(Optional.of(Wall.create(null, null)));
+        Optional<Wall> wall = new ReadWall(walls).with(Username.create("Alice"));
+        assertThat(wall.isPresent()).isTrue();
     }
 }

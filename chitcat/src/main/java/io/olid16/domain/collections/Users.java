@@ -6,7 +6,7 @@ import io.olid16.domain.values.Username;
 import java.util.Optional;
 
 public interface Users {
-    void add(User user);
+    User add(User user);
 
     Optional<User> by(Username username);
 }

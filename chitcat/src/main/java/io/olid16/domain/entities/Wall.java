@@ -2,22 +2,22 @@ package io.olid16.domain.entities;
 
 import com.google.common.base.Joiner;
 import io.olid16.domain.values.Chit;
+import io.olid16.domain.values.Username;
 
 import java.util.Date;
 import java.util.List;
+import java.util.NavigableSet;
 
 import static io.olid16.infrastructure.utils.TimeFormatter.timeFormatter;
 import static java.util.stream.Collectors.toList;
 
-public class Timeline {
-    private final List<Chit> chits;
+public class Wall {
+    private final Username username;
+    private final NavigableSet<Chit> chits;
 
-    private Timeline(List<Chit> chits) {
+    public Wall(Username username, NavigableSet<Chit> chits) {
+        this.username = username;
         this.chits = chits;
-    }
-
-    public static Timeline create(List<Chit> chits) {
-        return new Timeline(chits);
     }
 
     public List<String> formatWithCreationInstant() {
@@ -28,7 +28,9 @@ public class Timeline {
 
     private String formatChit(Chit chit) {
         return Joiner.on(" ").
-                join(chit.text(),
+                join(chit.username().value(),
+                        "-",
+                        chit.text(),
                         String.format("(%s)", elapsedTimeOf(chit)));
     }
 
@@ -36,8 +38,11 @@ public class Timeline {
         return timeFormatter().format(Date.from(chit.creationInstant()));
     }
 
-    public List<Chit> chits() {
-        return chits;
+    public static Wall create(Username username, NavigableSet<Chit> chits) {
+        return new Wall(username, chits);
     }
 
+    public NavigableSet<Chit> chits() {
+        return chits;
+    }
 }

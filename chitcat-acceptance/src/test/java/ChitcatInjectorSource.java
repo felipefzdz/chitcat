@@ -8,6 +8,6 @@ import io.olid16.infrastructure.dependency_injection.ChitcatModule;
 public class ChitcatInjectorSource implements InjectorSource {
     @Override
     public Injector getInjector() {
-        return Guice.createInjector(Stage.PRODUCTION, CucumberModules.SCENARIO, new ChitcatModule());
+        return Guice.createInjector(Stage.PRODUCTION, CucumberModules.SCENARIO, new ChitcatTestModule());
     }
 }

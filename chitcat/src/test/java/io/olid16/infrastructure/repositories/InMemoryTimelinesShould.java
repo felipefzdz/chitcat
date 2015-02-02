@@ -7,16 +7,16 @@ import org.junit.Test;
 
 import java.util.Optional;
 
+import static builders.ChitBuilder.aChit;
 import static com.google.common.truth.Truth.assertThat;
-import static java.time.Instant.now;
 
 public class InMemoryTimelinesShould {
-    
+
     @Test public void
     return_a_timeline_with_a_chit_when_has_been_previously_inserted() {
         InMemoryTimelines inMemoryTimelines = new InMemoryTimelines();
-        Chit chit = Chit.create("A Chit", now());
-        inMemoryTimelines.add(Username.create("Alice"), chit);
+        Chit chit = aChit().build();
+        inMemoryTimelines.add(chit);
         Optional<Timeline> timeline = inMemoryTimelines.by(Username.create("Alice"));
         assertThat(timeline.get().chits()).contains(chit);
     }
@@ -30,9 +30,9 @@ public class InMemoryTimelinesShould {
     @Test public void
     return_a_timeline_with_several_chits() {
         InMemoryTimelines inMemoryTimelines = new InMemoryTimelines();
-        inMemoryTimelines.add(Username.create("Alice"), Chit.create("A Chit", now()));
-        inMemoryTimelines.add(Username.create("Alice"), Chit.create("Another Chit", now()));
-        inMemoryTimelines.add(Username.create("Bob"), Chit.create("A Chit", now()));
+        inMemoryTimelines.add(aChit().w(Username.create("Alice")).build());
+        inMemoryTimelines.add(aChit().w(Username.create("Bob")).build());
+        inMemoryTimelines.add(aChit().w(Username.create("Alice")).build());
         Optional<Timeline> timeline = inMemoryTimelines.by(Username.create("Alice"));
         assertThat(timeline.get().chits().size()).is(2);
     }
