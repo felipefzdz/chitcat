@@ -8,5 +8,5 @@ Feature: Read Timeline
     And Bob writes FirstBobChit, 5 minutes ago
     And Alice writes SecondAliceChit, 3 minutes ago
     When a user reads Alice timeline
-    Then timeline should contain "FirstAliceChit (1 hour ago), SecondAliceChit (3 minutes ago)"
+    Then timeline should contain "SecondAliceChit (3 minutes ago), FirstAliceChit (1 hour ago)"
     

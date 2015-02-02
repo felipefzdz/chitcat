@@ -42,7 +42,7 @@ public class InMemoryWallsShould {
         inMemoryWalls.add(create("Alice"), asList(aliceNow, alice15DaysAgo));
 
         Optional<Wall> wall = inMemoryWalls.by(create("Alice"));
-        assertThat(wall.get().chits()).containsExactly(alice15DaysAgo, aliceTenDaysAgo, aliceNow).inOrder();
+        assertThat(wall.get().chits()).containsExactly(aliceNow, aliceTenDaysAgo, alice15DaysAgo).inOrder();
     }
 
 }

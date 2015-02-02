@@ -23,7 +23,7 @@ public class WallShould {
         List<String> formattedWall = Wall.create(null,
                 ImmutableSortedSet.of(bobChit, aliceChit)).
                 formatWithCreationInstant();
-        assertThat(formattedWall).containsSequence(asList("Alice - FirstAliceChit (15 minutes ago)", "Bob - FirstBobChit (5 seconds ago)"));
+        assertThat(formattedWall).containsSequence(asList("Bob - FirstBobChit (5 seconds ago)", "Alice - FirstAliceChit (15 minutes ago)"));
     }
 
     @Test public void

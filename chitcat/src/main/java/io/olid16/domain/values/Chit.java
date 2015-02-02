@@ -19,6 +19,6 @@ public abstract class Chit implements Comparable{
 
     @Override
     public int compareTo(Object o) {
-        return creationInstant().compareTo(((Chit)o).creationInstant());
+        return ((Chit) o).creationInstant().compareTo(creationInstant());
     }
 }

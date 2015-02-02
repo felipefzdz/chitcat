@@ -10,5 +10,5 @@ Feature: Read Wall
     And Charlie writes FirstCharlieChit, 50 seconds ago
     And Alice follows Charlie
     When a user reads Alice wall
-    Then wall should contain "Alice - FirstAliceChit (1 hour ago), Alice - SecondAliceChit (3 minutes ago), Charlie - FirstCharlieChit (50 seconds ago)"
+    Then wall should contain "Charlie - FirstCharlieChit (50 seconds ago), Alice - SecondAliceChit (3 minutes ago), Alice - FirstAliceChit (1 hour ago)"
     
