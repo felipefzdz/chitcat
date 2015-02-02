@@ -121,7 +121,7 @@
                 <artifactId>coveralls-maven-plugin</artifactId>
                 <version>3.0.1</version>
                 <configuration>
-                    <repoToken>${env.COVERALLS_HEFESTO_TOKEN}</repoToken>
+                    <repoToken>${env.COVERALLS_CHITCAT_TOKEN}</repoToken>
                 </configuration>
             </plugin>
             <plugin>
