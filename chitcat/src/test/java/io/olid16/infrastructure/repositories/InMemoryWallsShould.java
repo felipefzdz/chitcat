@@ -3,6 +3,7 @@ package io.olid16.infrastructure.repositories;
 import io.olid16.domain.entities.Wall;
 import io.olid16.domain.values.Chit;
 
+import java.util.Arrays;
 import java.util.Optional;
 
 import static builders.ChitBuilder.aChit;
@@ -10,6 +11,7 @@ import static com.google.common.truth.Truth.assertThat;
 import static io.olid16.domain.values.Username.create;
 import static java.time.Instant.now;
 import static java.time.temporal.ChronoUnit.DAYS;
+import static java.util.Arrays.*;
 
 public class InMemoryWallsShould {
 
@@ -37,9 +39,7 @@ public class InMemoryWallsShould {
         InMemoryWalls inMemoryWalls = new InMemoryWalls();
         inMemoryWalls.add(create("Alice"), aliceTenDaysAgo);
         inMemoryWalls.add(create("Bob"), aChit().w(create("Bob")).build());
-        inMemoryWalls.add(create("Alice"), aliceNow);
-        inMemoryWalls.add(create("Alice"), alice15DaysAgo);
-
+        inMemoryWalls.add(create("Alice"), asList(aliceNow, alice15DaysAgo));
 
         Optional<Wall> wall = inMemoryWalls.by(create("Alice"));
         assertThat(wall.get().chits()).containsExactly(alice15DaysAgo, aliceTenDaysAgo, aliceNow).inOrder();
