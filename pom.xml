@@ -112,6 +112,7 @@
                 </executions>
                 <configuration>
                     <excludes>
+                        <exclude>**/AutoValue*</exclude>
                         <exclude>**/*Module*</exclude>
                     </excludes>
                 </configuration>
