@@ -114,6 +114,8 @@
                     <excludes>
                         <exclude>**/AutoValue*</exclude>
                         <exclude>**/*Module*</exclude>
+                        <exclude>**/*Launcher*</exclude>
+                        <exclude>**/cli/wrappers/**</exclude>
                     </excludes>
                 </configuration>
             </plugin>
