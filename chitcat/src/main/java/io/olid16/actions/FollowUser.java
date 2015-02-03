@@ -28,6 +28,6 @@ public class FollowUser {
     }
 
     private void updateFollowerWall(Username follower, Username followeeUsername) {
-        timelines.by(followeeUsername).ifPresent(x -> walls.add(follower, x.chits()));
+        timelines.by(followeeUsername).ifPresent(timeline -> walls.add(follower, timeline.chits()));
     }
 }

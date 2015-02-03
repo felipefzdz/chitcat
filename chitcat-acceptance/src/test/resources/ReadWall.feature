@@ -1,7 +1,7 @@
 Feature: Read Wall
   As a user
   I want to read a user wall
-  So I can read the chits created by that user and the ones of her followings
+  So I can read the chits created by that user and the ones of her followees
   
   Scenario: Read Wall
     Given Alice writes FirstAliceChit, 1 hours ago

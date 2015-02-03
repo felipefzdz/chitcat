@@ -15,9 +15,11 @@ import java.util.List;
 import java.util.Optional;
 
 import static builders.ChitBuilder.aChit;
-import static io.olid16.domain.values.Username.create;
+import static io.olid16.domain.entities.Timeline.*;
+import static io.olid16.domain.values.Username.createUsername;
 import static java.time.Instant.now;
 import static java.util.Arrays.asList;
+import static java.util.Optional.*;
 import static java.util.Optional.empty;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
@@ -34,15 +36,15 @@ public class FollowUserShould {
 
     @Test public void
     add_follower_into_followee() {
-        given(users.by(any())).willReturn(Optional.of(user));
+        given(users.by(any())).willReturn(of(user));
         given(timelines.by(any())).willReturn(empty());
-        new FollowUser(users, timelines, walls).with(create("Alice"), null);
-        verify(user).addFollower(create("Alice"));
+        new FollowUser(users, timelines, walls).with(createUsername("Alice"), null);
+        verify(user).addFollower(createUsername("Alice"));
     }
 
     @Test public void
     throw_illegal_argument_exception_when_followee_not_exists(){
-        given(users.by(any())).willReturn(Optional.empty());
+        given(users.by(any())).willReturn(empty());
         assertThrows(IllegalArgumentException.class, () -> new FollowUser(users, timelines, walls).with(null, null));
     }
 
@@ -50,10 +52,10 @@ public class FollowUserShould {
     update_follower_wall_with_followee_timeline(){
         List<Chit> chits = asList(aChit().build(), aChit().w(now()).build());
 
-        given(users.by(any())).willReturn(Optional.of(user));
-        given(timelines.by(any())).willReturn(Optional.of(Timeline.create(chits)));
+        given(users.by(any())).willReturn(of(user));
+        given(timelines.by(any())).willReturn(of(createTimeline(chits)));
 
-        new FollowUser(users, timelines, walls).with(create("Alice"), null);
-        verify(walls).add(create("Alice"), chits);
+        new FollowUser(users, timelines, walls).with(createUsername("Alice"), null);
+        verify(walls).add(createUsername("Alice"), chits);
     }
 }

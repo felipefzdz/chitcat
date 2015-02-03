@@ -10,7 +10,8 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import static builders.ChitBuilder.aChit;
-import static io.olid16.domain.values.Username.create;
+import static io.olid16.domain.entities.User.createUser;
+import static io.olid16.domain.values.Username.createUsername;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 import static org.mockito.BDDMockito.given;
@@ -27,33 +28,33 @@ public class CreateChitShould {
     @Test public void
     create_user_if_it_did_not_exist_previously(){
         given(users.by(any())).willReturn(empty());
-        given(users.add(any())).willReturn(User.create(create("Alice")));
+        given(users.add(any())).willReturn(createUser(createUsername("Alice")));
         new CreateChit(users, timelines, walls).with(aChit().build());
-        verify(users).add(User.create(create("Alice")));
+        verify(users).add(createUser(createUsername("Alice")));
     }
 
     @Test public void
     add_chit_into_timelines(){
-        given(users.by(any())).willReturn(of(User.create(create("Alice"))));
+        given(users.by(any())).willReturn(of(createUser(createUsername("Alice"))));
         new CreateChit(users, timelines, walls).with(aChit().build());
         verify(timelines).add(aChit().build());
     }
 
     @Test public void
     add_chit_into_followers_wall(){
-        User alice = User.create(create("Alice"));
-        alice.addFollower(create("Bob"));
-        alice.addFollower(create("Charlie"));
+        User alice = createUser(createUsername("Alice"));
+        alice.addFollower(createUsername("Bob"));
+        alice.addFollower(createUsername("Charlie"));
         given(users.by(any())).willReturn(of(alice));
         new CreateChit(users, timelines, walls).with(aChit().build());
-        verify(walls).add(create("Bob"), aChit().build());
-        verify(walls).add(create("Charlie"), aChit().build());
+        verify(walls).add(createUsername("Bob"), aChit().build());
+        verify(walls).add(createUsername("Charlie"), aChit().build());
     }
 
     @Test public void
     add_chit_into_own_wall(){
-        given(users.by(any())).willReturn(of(User.create(create("Alice"))));
+        given(users.by(any())).willReturn(of(createUser(createUsername("Alice"))));
         new CreateChit(users, timelines, walls).with(aChit().build());
-        verify(walls).add(create("Alice"), aChit().build());
+        verify(walls).add(createUsername("Alice"), aChit().build());
     }
 }

@@ -9,6 +9,7 @@ import io.olid16.domain.values.Username;
 import java.util.List;
 import java.util.Optional;
 
+import static io.olid16.domain.entities.Wall.*;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 
@@ -19,7 +20,7 @@ public class InMemoryWalls implements Walls {
     @Override
     public Optional<Wall> by(Username username) {
         return walls.containsKey(username) ?
-                of(Wall.create(username, walls.get(username))) :
+                of(createWall(walls.get(username))) :
                 empty();
     }
 

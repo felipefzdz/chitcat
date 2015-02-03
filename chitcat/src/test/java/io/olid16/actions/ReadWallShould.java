@@ -11,6 +11,8 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.Optional;
 
 import static com.google.common.truth.Truth.assertThat;
+import static io.olid16.domain.entities.Wall.createWall;
+import static io.olid16.domain.values.Username.createUsername;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 
@@ -21,8 +23,8 @@ public class ReadWallShould {
 
     @Test public void
     return_walls_when_exists(){
-        given(walls.by(any())).willReturn(Optional.of(Wall.create(null, null)));
-        Optional<Wall> wall = new ReadWall(walls).with(Username.create("Alice"));
-        assertThat(wall.isPresent()).isTrue();
+        given(walls.by(any())).willReturn(Optional.of(createWall(null)));
+        Optional<Wall> wall = new ReadWall(walls).with(createUsername("Alice"));
+        assertThat(wall.isPresent());
     }
 }

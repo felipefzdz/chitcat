@@ -1,4 +1,4 @@
-package io.olid16.infrastructure.cli;
+package io.olid16.infrastructure.cli.wrappers;
 
 import static java.lang.System.out;
 

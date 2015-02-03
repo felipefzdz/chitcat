@@ -12,12 +12,14 @@ import static io.olid16.infrastructure.utils.TimeFormatter.timeFormatter;
 import static java.util.stream.Collectors.toList;
 
 public class Wall {
-    private final Username username;
     private final NavigableSet<Chit> chits;
 
-    public Wall(Username username, NavigableSet<Chit> chits) {
-        this.username = username;
+    private Wall(NavigableSet<Chit> chits) {
         this.chits = chits;
+    }
+
+    public static Wall createWall(NavigableSet<Chit> chits) {
+        return new Wall(chits);
     }
 
     public List<String> formatWithCreationInstant() {
@@ -36,10 +38,6 @@ public class Wall {
 
     private String elapsedTimeOf(Chit chit) {
         return timeFormatter().format(Date.from(chit.creationInstant()));
-    }
-
-    public static Wall create(Username username, NavigableSet<Chit> chits) {
-        return new Wall(username, chits);
     }
 
     public NavigableSet<Chit> chits() {

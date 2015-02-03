@@ -13,7 +13,8 @@ import io.olid16.domain.values.Username;
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
-import static io.olid16.domain.values.Chit.create;
+import static io.olid16.domain.values.Chit.createChit;
+import static io.olid16.domain.values.Username.*;
 import static java.time.Instant.now;
 import static java.time.temporal.ChronoUnit.valueOf;
 
@@ -31,18 +32,18 @@ public class ReadTimelineStepDefs {
 
     @Given("^([^ ]+) writes ([^ ]+), (\\d+) ([^ ]+) ago$")
     public void user_writes_a_chit_some_minutes_ago(String userName, String chitText, int minutesAgo, String chronoUnit) throws Throwable {
-        Chit chit = create(chitText, now().minus(minutesAgo, valueOf(chronoUnit.toUpperCase())), Username.create(userName));
+        Chit chit = createChit(chitText, now().minus(minutesAgo, valueOf(chronoUnit.toUpperCase())), createUsername(userName));
         createChit.with(chit);
     }
 
     @When("^a user reads ([^ ]+) timeline$")
     public void a_user_read_a_timeline(String userName) throws Throwable {
-        timeline = readTimeline.with(Username.create(userName)).get();
+        timeline = readTimeline.with(createUsername(userName)).get();
     }
 
     @Then("^timeline should contain \"(.+)\"")
     public void timeline_should_contain_chits(List<String> chits) throws Throwable {
-        assertThat(timeline.formatWithCreationInstant()).containsSequence(chits);
+        assertThat(timeline.format()).containsSequence(chits);
     }
 
 }

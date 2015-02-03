@@ -10,8 +10,12 @@ public class Command {
     private Username followee;
     private Username username;
 
-    public Command(CommandType type) {
+    private Command(CommandType type) {
         this.type = type;
+    }
+
+    public static Command createCommand(CommandType type) {
+        return new Command(type);
     }
 
     public CommandType type() {
@@ -55,7 +59,6 @@ public class Command {
     }
 
     public static enum CommandType {
-
         CREATE_CHIT, FOLLOW_USER, READ_TIMELINE, READ_WALL
     }
 }

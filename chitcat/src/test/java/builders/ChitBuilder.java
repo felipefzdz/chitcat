@@ -5,6 +5,8 @@ import io.olid16.domain.values.Username;
 
 import java.time.Instant;
 
+import static io.olid16.domain.values.Chit.*;
+import static io.olid16.domain.values.Username.*;
 import static java.time.Instant.now;
 
 public class ChitBuilder {
@@ -20,11 +22,11 @@ public class ChitBuilder {
     }
 
     public static ChitBuilder aChit() {
-        return new ChitBuilder("A chit", now, Username.create("Alice"));
+        return new ChitBuilder("A chit", now, createUsername("Alice"));
     }
 
     public Chit build() {
-        return Chit.create(text, creationInstant, username);
+        return createChit(text, creationInstant, username);
     }
 
     public ChitBuilder w(String text) {

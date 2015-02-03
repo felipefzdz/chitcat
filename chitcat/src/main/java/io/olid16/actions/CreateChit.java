@@ -8,6 +8,10 @@ import io.olid16.domain.entities.User;
 import io.olid16.domain.values.Chit;
 import io.olid16.domain.values.Username;
 
+import java.util.Set;
+
+import static io.olid16.domain.entities.User.*;
+
 public class CreateChit {
     private final Users users;
     private final Timelines timelines;
@@ -22,25 +26,25 @@ public class CreateChit {
 
     public void with(Chit chit) {
         User user = createUserIfMissingFor(chit.username());
-        updateFollowersWall(chit, user);
-        updateTimeline(chit);
-        updateWall(chit);
-    }
-
-    private void updateWall(Chit chit) {
-        walls.add(chit.username(), chit);
-    }
-
-    private void updateFollowersWall(Chit chit, User user) {
-        user.followers().stream()
-            .forEach(follower -> walls.add(follower, chit));
-    }
-
-    private void updateTimeline(Chit chit) {
-        timelines.add(chit);
+        updateFollowersWallWith(chit, user.followers());
+        updateTimelineWith(chit);
+        updateWallWith(chit);
     }
 
     private User createUserIfMissingFor(Username username) {
-        return users.by(username).orElse(users.add(User.create(username)));
+        return users.by(username).orElse(users.add(createUser(username)));
+    }
+
+    private void updateFollowersWallWith(Chit chit, Set<Username> followers) {
+        followers.stream()
+                .forEach(follower -> walls.add(follower, chit));
+    }
+
+    private void updateTimelineWith(Chit chit) {
+        timelines.add(chit);
+    }
+
+    private void updateWallWith(Chit chit) {
+        walls.add(chit.username(), chit);
     }
 }

@@ -9,7 +9,7 @@ import io.olid16.domain.values.Username;
 import java.util.Optional;
 
 import static com.google.common.collect.Lists.reverse;
-import static io.olid16.domain.entities.Timeline.create;
+import static io.olid16.domain.entities.Timeline.createTimeline;
 import static java.util.Optional.empty;
 import static java.util.Optional.of;
 
@@ -24,7 +24,7 @@ public class InMemoryTimelines implements Timelines {
     @Override
     public Optional<Timeline> by(Username username) {
         return timelines.containsKey(username) ?
-                of(create(reverse(timelines.get(username)))) :
+                of(createTimeline(reverse(timelines.get(username)))) :
                 empty();
     }
 }

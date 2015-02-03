@@ -11,6 +11,9 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.Optional;
 
 import static com.google.common.truth.Truth.assertThat;
+import static io.olid16.domain.entities.Timeline.createTimeline;
+import static io.olid16.domain.values.Username.*;
+import static java.util.Optional.*;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Matchers.any;
 
@@ -21,8 +24,8 @@ public class ReadTimelineShould {
 
     @Test public void
     return_timeline_when_exists(){
-        given(timelines.by(any())).willReturn(Optional.of(Timeline.create(null)));
-        Optional<Timeline> timeline = new ReadTimeline(timelines).with(Username.create("Alice"));
-        assertThat(timeline.isPresent()).isTrue();
+        given(timelines.by(any())).willReturn(of(createTimeline(null)));
+        Optional<Timeline> timeline = new ReadTimeline(timelines).with(createUsername("Alice"));
+        assertThat(timeline.isPresent());
     }
 }

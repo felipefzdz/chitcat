@@ -5,7 +5,7 @@ import com.google.auto.value.AutoValue;
 @AutoValue
 public abstract class Username implements Comparable {
     
-    public static Username create(String value){
+    public static Username createUsername(String value){
         return new AutoValue_Username(value);
         
     }

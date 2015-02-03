@@ -1,4 +1,4 @@
-package io.olid16.infrastructure.cli;
+package io.olid16.infrastructure.cli.wrappers;
 
 import com.google.inject.Inject;
 
@@ -16,7 +16,7 @@ public class InputReader {
     }
 
 
-    public String next() {
+    public String read() {
         return scanner.nextLine();
     }
 

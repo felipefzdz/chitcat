@@ -12,6 +12,7 @@ import io.olid16.domain.values.Username;
 import java.util.List;
 
 import static com.google.common.truth.Truth.assertThat;
+import static io.olid16.domain.values.Username.*;
 
 public class ReadWallStepDefs {
 
@@ -27,12 +28,12 @@ public class ReadWallStepDefs {
 
     @And("^([^ ]+) follows ([^ ]+)$")
     public void follower_follows_followee(String follower, String followee) throws Throwable {
-        followUser.with(Username.create(follower), Username.create(followee));
+        followUser.with(createUsername(follower), createUsername(followee));
     }
 
     @When("^a user reads ([^ ]+) wall$")
     public void a_user_reads_user_wall(String username) throws Throwable {
-        wall = readWall.with(Username.create(username)).get();
+        wall = readWall.with(createUsername(username)).get();
     }
 
     @Then("^wall should contain \"(.+)\"$")

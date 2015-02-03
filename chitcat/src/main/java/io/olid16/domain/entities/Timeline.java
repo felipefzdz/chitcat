@@ -16,20 +16,18 @@ public class Timeline {
         this.chits = chits;
     }
 
-    public static Timeline create(List<Chit> chits) {
+    public static Timeline createTimeline(List<Chit> chits) {
         return new Timeline(chits);
     }
 
-    public List<String> formatWithCreationInstant() {
+    public List<String> format() {
         return chits.stream()
                 .map(this::formatChit)
                 .collect(toList());
     }
 
     private String formatChit(Chit chit) {
-        return Joiner.on(" ").
-                join(chit.text(),
-                        String.format("(%s)", elapsedTimeOf(chit)));
+        return Joiner.on(" ").join(chit.text(), String.format("(%s)", elapsedTimeOf(chit)));
     }
 
     private String elapsedTimeOf(Chit chit) {

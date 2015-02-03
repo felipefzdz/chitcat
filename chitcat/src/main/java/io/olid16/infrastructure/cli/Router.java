@@ -5,8 +5,10 @@ import io.olid16.actions.CreateChit;
 import io.olid16.actions.FollowUser;
 import io.olid16.actions.ReadTimeline;
 import io.olid16.actions.ReadWall;
+import io.olid16.infrastructure.cli.wrappers.InputReader;
+import io.olid16.infrastructure.cli.wrappers.OutputWriter;
 
-public class Prompt {
+public class Router {
 
     private final CliParser cliParser;
     private final CreateChit createChit;
@@ -17,12 +19,12 @@ public class Prompt {
     private final OutputWriter out;
 
     @Inject
-    public Prompt(CliParser cliParser,
+    public Router(CliParser cliParser,
                   CreateChit createChit,
                   FollowUser followUser,
                   ReadTimeline readTimeline,
-                  ReadWall readWall, 
-                  InputReader reader, 
+                  ReadWall readWall,
+                  InputReader reader,
                   OutputWriter out) {
         this.cliParser = cliParser;
         this.createChit = createChit;
@@ -33,8 +35,8 @@ public class Prompt {
         this.out = out;
     }
 
-    public void start() {
-        Command command = cliParser.parse(reader.next());
+    public void route() {
+        Command command = cliParser.parse(reader.read());
         switch (command.type()){
             case CREATE_CHIT: createChit.with(command.chit());
                 break;
@@ -42,7 +44,7 @@ public class Prompt {
                 break;
             case READ_TIMELINE:
                 readTimeline.with(command.username()).
-                        ifPresent(timeline -> timeline.formatWithCreationInstant().forEach(out::write));
+                        ifPresent(timeline -> timeline.format().forEach(out::write));
                 break;
             case READ_WALL:
                 readWall.with(command.username()).
