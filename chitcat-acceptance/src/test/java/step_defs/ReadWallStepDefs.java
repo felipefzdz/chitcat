@@ -7,7 +7,6 @@ import cucumber.api.java.en.When;
 import io.olid16.actions.FollowUser;
 import io.olid16.actions.ReadWall;
 import io.olid16.domain.entities.Wall;
-import io.olid16.domain.values.Username;
 
 import java.util.List;
 
@@ -38,6 +37,6 @@ public class ReadWallStepDefs {
 
     @Then("^wall should contain \"(.+)\"$")
     public void wall_should_contain(List<String> chits) throws Throwable {
-        assertThat(wall.formatWithCreationInstant()).containsSequence(chits);
+        assertThat(wall.format()).containsSequence(chits);
     }
 }

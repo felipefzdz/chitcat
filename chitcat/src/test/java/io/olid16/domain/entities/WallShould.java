@@ -2,7 +2,6 @@ package io.olid16.domain.entities;
 
 import com.google.common.collect.ImmutableSortedSet;
 import io.olid16.domain.values.Chit;
-import io.olid16.domain.values.Username;
 import org.junit.Test;
 
 import java.util.List;
@@ -24,13 +23,13 @@ public class WallShould {
         Chit bobChit = aChit().w(createUsername("Bob")).w("FirstBobChit").w(now().minus(5, SECONDS)).build();
         List<String> formattedWall = createWall(
                 ImmutableSortedSet.of(bobChit, aliceChit)).
-                formatWithCreationInstant();
+                format();
         assertThat(formattedWall).containsSequence(asList("Bob - FirstBobChit (5 seconds ago)", "Alice - FirstAliceChit (15 minutes ago)"));
     }
 
     @Test public void
     return_empty_list_when_there_are_not_chits(){
-        List<String> formattedWall = createWall(ImmutableSortedSet.of()).formatWithCreationInstant();
+        List<String> formattedWall = createWall(ImmutableSortedSet.of()).format();
         assertThat(formattedWall).isEmpty();
     }
 

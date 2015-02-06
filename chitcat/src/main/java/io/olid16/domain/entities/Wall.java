@@ -22,7 +22,7 @@ public class Wall {
         return new Wall(chits);
     }
 
-    public List<String> formatWithCreationInstant() {
+    public List<String> format() {
         return chits.stream()
                 .map(this::formatChit)
                 .collect(toList());
